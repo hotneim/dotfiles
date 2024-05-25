@@ -9,8 +9,8 @@
 # zshrc - configuration for the zsh
 
 # File listings
-alias ls="gls -lhLF --group-directories-first --color=auto"
-alias la="gls -lhAF --group-directories-first --color=auto"
+alias ls="lsd -lL"
+alias la="lsd -lA"
 
 # Open config files
 alias zs="nvim ~/.zshrc"
