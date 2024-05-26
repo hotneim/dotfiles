@@ -42,5 +42,26 @@ alias review='nvim ~/work/notes/inbox/*.md'
 # Add folder of binaries to path
 export PATH="$PATH:/Users/hakon/work/config/bin"
 
+# Source zsh-autosuggestions
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+#
+# Source zsh-syntax-highlighting
+source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# Enable fuzzy matching in zsh completions
+zstyle ':completion:*' matcher-list 'r:|?=**'
+zstyle ':completion:*' accept-exact true
+zstyle ':completion:*' list-suffixes true
+
+# Initialize zsh completion system
+autoload -U compinit && compinit
+
+# Source fzf-tab
+source ~/.zsh/fzf-tab/fzf-tab.plugin.zsh
+
+# Source fzf if it's not already added by the installation script
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 # Enable starship prompt
 eval "$(starship init zsh)"
+
