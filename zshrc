@@ -35,6 +35,9 @@ alias .....="cd ../../../.."
 # Activate conda virtual environments
 alias ds="conda activate ~/work/venv/ds"
 
+# Use bat instead of cat (requires "brew install bat")
+alias cat="bat"
+
 # Notes
 alias notes='cd ~/work/notes/' 
 alias review='nvim ~/work/notes/inbox/*.md'
