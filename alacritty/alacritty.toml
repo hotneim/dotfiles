@@ -1,0 +1,38 @@
+#
+#  ██╗  ██╗ ██████╗
+#  ██║  ██║██╔═══██╗   Håkon Otneim
+#  ███████║██║   ██║   haakon.otneim@protonmail.com
+#  ██╔══██║██║   ██║   hotneim.github.com
+#  ██║  ██║╚██████╔
+#  ╚═╝  ╚═╝ ╚═════╝
+#
+# configuration for the alacritty terminal emulator
+
+import = ["~/.config/alacritty/themes/gruvbox_dark.toml"]
+
+[font]
+size = 15
+
+[font.normal]
+family = "Comic Code Ligatures"
+style = "Light"
+
+[font.italic]
+family = "Comic Code Ligatures"
+style = "Light Italic"
+
+[font.bold]
+family = "Comic Code Ligatures"
+style = "Medium"
+
+[font.bold_italic]
+family = "Comic Code Ligatures"
+style = "Medium Italic"
+
+[window]
+dimensions = { columns = 100, lines = 70}
+
+[keyboard]
+bindings = [
+  { key = "Return", mods = "Control", chars = "\\x0d" }
+]
