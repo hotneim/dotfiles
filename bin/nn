@@ -1,0 +1,72 @@
+#!/bin/zsh
+
+# Check if at least one argument is provided
+if [ $# -eq 0 ]; then
+  echo "Error: At least a title must be provided."
+  exit 1
+fi
+
+# Initialize variables
+open_in_nvim=1  # Default to opening in Neovim
+
+# Process --no-open flag
+for arg in "$@"; do
+  if [ "$arg" = "--no-open" ]; then
+    open_in_nvim=0
+    break
+  fi
+done
+
+# Process date and title
+if [ $# -eq 1 ] || ([ $# -eq 2 ] && [ $open_in_nvim -eq 0 ]); then
+  date=$(date "+%Y-%m-%d")
+  title=${1}
+elif [ $# -eq 2 ] && [ $open_in_nvim -eq 1 ]; then
+  if [[ "$1" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then
+    date=$1
+    title=$2
+  else
+    echo "Error: The date must be in the format YYYY-MM-DD."
+    exit 1
+  fi
+elif [ $# -eq 3 ]; then
+  if [[ "$1" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then
+    date=$1
+    title=$2
+  else
+    echo "Error: Invalid arguments."
+    exit 1
+  fi
+else
+  echo "Error: Incorrect number of arguments."
+  exit 1
+fi
+
+# Prepare the file name by replacing spaces with hyphens and converting to lower case
+file_name=$(echo "$title" | tr ' ' '-' | tr '[:upper:]' '[:lower:]')
+formatted_file_name="${date}_${file_name}.md"
+file_path="/Users/hakon/work/notes/inbox/${formatted_file_name}"
+
+# Change to the target directory
+cd "/Users/hakon/work/notes/" || exit
+
+if [ ! -f "$file_path" ]; then
+  # Populate the file with the header
+  echo "---" > "$file_path"
+  echo "alias: ${title}" >> "$file_path"
+  echo "date: ${date}" >>  "$file_path"
+  echo "folder:" >> "$file_path"
+  echo "  - " >> "$file_path"
+  echo "tags:" >> "$file_path"
+  echo "  - " >> "$file_path"
+  echo "---" >> "$file_path"
+  echo "" >> "$file_path"
+  echo "# ${title}" >> "$file_path"
+fi
+
+# Check for flag to avoid opening in nvim
+if [ $open_in_nvim -eq 1 ]; then
+    # Open the file in neovim
+    nvim "$file_path"
+fi
+

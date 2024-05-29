@@ -1,0 +1,28 @@
+#!/bin/zsh
+
+# Set the date. 
+date=$(date "+%Y-%m-%d")
+ 
+# Prepare the file name by replacing spaces with hyphens and converting to lower case
+formatted_file_name="${date}.md"
+file_path="/Users/hakon/work/notes/inbox/${formatted_file_name}"
+
+# Change to the target directory
+cd "/Users/hakon/work/notes/" || exit
+
+if [ ! -f "$file_path" ]; then
+  # Populate the file with the header
+  echo "---" > "inbox/${formatted_file_name}"
+  echo "date: ${date}" >> "inbox/${formatted_file_name}"
+  echo "folder:" >> "inbox/${formatted_file_name}"
+  echo "  - daily" >> "inbox/${formatted_file_name}"
+  echo "---" >> "inbox/${formatted_file_name}"
+  echo "" >> "inbox/${formatted_file_name}"
+  echo "#" >> "inbox/${formatted_file_name}"
+fi
+
+# Check for flag to avoid opening in nvim
+if [ "$1" != "--no-open" ]; then
+    # Open the file in neovim
+    nvim "$file_path"
+fi

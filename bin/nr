@@ -1,0 +1,87 @@
+#!/bin/zsh
+
+# Check the minimum number of arguments (without considering the flag)
+if [ $# -lt 3 ]; then
+  echo "Error: Missing arguments. Usage: $0 <type> <author> <title> [--no-open]"
+  exit 1
+fi
+
+# Extract the document type
+doc_type=$1
+
+# Validate the document type
+case $doc_type in
+  B|b)
+    doc_type="book"
+    ;;
+  P|p)
+    doc_type="paper"
+    ;;
+  A|a)
+    doc_type="article"
+    ;;
+  *)
+    echo "Error: Invalid document type. Must be 'B', 'P', or 'A'."
+    exit 1
+    ;;
+esac
+
+# Extract the author and title
+author=$2
+title=$3
+
+# Check for the --no-open flag
+open_in_nvim=1  # Assume we open in nvim by default
+if [ $# -eq 4 ] && [ "$4" = "--no-open" ]; then
+  open_in_nvim=0
+fi
+
+# Debugging output to confirm input handling
+echo "Document Type: $doc_type"
+echo "Author: $author"
+echo "Title: $title"
+echo "Open in Neovim: $open_in_nvim"
+
+formatted_type=$(echo "$1" | tr '[:upper:]' '[:lower:]')
+formatted_author=$(echo "$author" | tr ' ' '-' | tr '[:upper:]' '[:lower:]')
+formatted_title=$(echo "$title" | tr ' ' '-' | tr '[:upper:]' '[:lower:]')
+
+formatted_file_name="${formatted_type}_${formatted_author}_${formatted_title}.md"
+file_path="/Users/hakon/work/notes/inbox/${formatted_file_name}"
+
+
+if [ ! -f "$file_path" ]; then
+  # Populate the file with the header
+  echo "---" > "$file_path"
+  echo "alias: ${title}" >> "$file_path"
+  echo "author: ${author}" >>  "$file_path"
+  echo "folder:" >> "$file_path"
+  echo "  - reading" >> "$file_path"
+  echo "tags:" >> "$file_path"
+  echo "  - [[${doc_type}]]" >> "$file_path"
+
+  if [ "$doc_type" = "book" ]; then
+    echo "finished:" >> "$file_path"
+    echo "  - " >> "$file_path"
+  fi
+
+  # Check if the document type is 'paper' and add specific content
+  if [ "$doc_type" = "paper" ]; then
+    echo "year:" >> "$file_path"
+    echo "journal:" >> "$file_path"
+    echo "volume:" >> "$file_path"
+    echo "issue:" >> "$file_path"
+    echo "url:" >> "$file_path"
+    echo "created: $(date '+%Y-%m-%d %H:%M')" >> "$file_path"
+  fi
+
+  echo "---" >> "$file_path"
+  echo "" >> "$file_path"
+  echo "# ${title} by ${author}" >> "$file_path"
+fi
+
+# Check for flag to avoid opening in nvim
+if [ $open_in_nvim -eq 1 ]; then
+    # Open the file in neovim
+    nvim "$file_path"
+fi

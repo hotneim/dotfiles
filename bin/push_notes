@@ -1,0 +1,5 @@
+#!/bin/bash
+MESSAGE="Auto-commit: $(date)"
+REPO_PATH="/Users/hakon/work/notes/"
+git -C "$REPO_PATH" add -A
+git -C "$REPO_PATH" commit -m "$MESSAGE"

@@ -1,0 +1,43 @@
+#!/bin/zsh
+
+# Define the input folder and output file
+INPUT_FOLDER="/Users/hakon/work/notes/zk/meetings/"
+OUTPUT_FILE="/Users/hakon/work/notes/lists/meetings.md"
+
+# Create a temporary directory to store the entries
+TEMP_DIR=$(mktemp -d)
+
+# Iterate over all markdown files in the input folder
+for file in "$INPUT_FOLDER"*.md; do
+  # Extract the yaml header
+  yaml_header=$(sed -n '/^---$/,/^---$/p' "$file")
+  
+  # Extract the relevant fields from the yaml header
+  alias=$(echo "$yaml_header" | grep "^alias:" | sed 's/alias: //')
+  date=$(echo "$yaml_header" | grep "^date:" | sed 's/date: //')
+  
+  # Extract only the tags section
+  tags_section=$(echo "$yaml_header" | sed -n '/tags:/,/^$/p')
+  tags=$(echo "$tags_section" | grep "^  - " | sed 's/  - //' | tr -d '\r' | tr '\n' ' ')
+  
+  # Create an entry for each tag
+  for tag in ${(s: :)tags}; do
+    tag=$(echo "$tag" | tr -d '\r' | tr -d '\n' | tr -d '[:space:]')
+    echo "- *$date:* [[${file##*/}|$alias]]" >> "$TEMP_DIR/$tag"
+  done
+done
+
+# Sort the entries by date for each tag and write to the output file
+echo "" > "$OUTPUT_FILE"
+for tag_file in "$TEMP_DIR"/*; do
+  tag=$(basename "$tag_file")
+  echo "## **${(U)tag}**" >> "$OUTPUT_FILE"
+  sort -r -t ':' -k 2 "$tag_file" >> "$OUTPUT_FILE"
+  echo "" >> "$OUTPUT_FILE"
+done
+
+# Clean up temporary files
+rm -r "$TEMP_DIR"
+
+echo "Meeting notes organized in $OUTPUT_FILE"
+

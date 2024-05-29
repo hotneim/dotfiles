@@ -1,0 +1,44 @@
+# #!/bin/zsh
+#
+# Directory containing markdown files
+VAULT_DIR="/Users/hakon/work/notes"
+SOURCE_DIR="inbox/accepted"
+DEST_DIR="zk"
+
+
+if [ ! -d "$VAULT_DIR/$SOURCE_DIR" ]; then
+    echo "Directory $VAULT_DIR/$SOURCE_DIR does not exist"
+    exit 1
+fi
+if [ $(find "$VAULT_DIR/$SOURCE_DIR" -type f -name "*.md" | wc -l) -eq 0 ]; then
+    echo "No markdown files found in $VAULT_DIR/$SOURCE_DIR"
+    exit 1
+fi
+echo "Looking for files in $VAULT_DIR/$SOURCE_DIR"
+find "$VAULT_DIR/$SOURCE_DIR" -type f -name "*.md"
+# Iterate through all markdown files in the source directory
+find "$VAULT_DIR/$SOURCE_DIR" -type f -name "*.md" | while read -r file; do
+  echo "Processing $file"
+
+  # Extract the tag from the file. This assumes the tag is on the line immediately following "tags:"
+  tag=$(awk '/folder:/{getline; print; exit}' "$file" | sed -e 's/^ *- *//' -e 's/^ *//;s/ *$//')
+
+  echo "Found tag $tag"
+
+  # If a tag is found, proceed with moving the file
+  if [ ! -z "$tag" ]; then
+    # Create the target directory if it doesn't exist
+    TARGET_DIR="$VAULT_DIR/$DEST_DIR/$tag"
+    mkdir -p "$TARGET_DIR"
+
+    # Move the file to the target directory
+    mv "$file" "$TARGET_DIR/"
+    echo "Moved $file to $TARGET_DIR"
+  else
+    echo "No tag found for $file"
+  fi
+
+done
+
+echo "Done 🪷"
+

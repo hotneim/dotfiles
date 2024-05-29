@@ -43,7 +43,7 @@ alias notes='cd ~/work/notes/'
 alias review='nvim ~/work/notes/inbox/*.md'
 
 # Add folder of binaries to path
-export PATH="$PATH:/Users/hakon/work/config/bin"
+export PATH="$PATH:/Users/hakon/work/dotfiles/bin"
 
 # Source zsh-autosuggestions
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
