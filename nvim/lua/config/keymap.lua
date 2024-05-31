@@ -39,6 +39,32 @@ wk.register({
   d = { '"_d', 'delete without overwriting reg' },
 }, { mode = 'v', prefix = '<leader>' })
 
+
+-- Function to open terminal windows with specified split mode
+local function new_terminal(lang, mode)
+  local split_flag = (mode == 'horizontal') and '-h' or '-v'
+  vim.fn.system('tmux split-window ' .. split_flag .. ' ' .. lang)
+end
+
+
+-- Functions for opening terminal windows
+local function new_terminal(lang)
+  -- vim.cmd('vsplit term://' .. lang)
+  vim.fn.system('tmux split-window -h ' .. lang)
+end
+
+local function new_terminal_python()
+  new_terminal 'python3'
+end
+
+local function new_terminal_r()
+  new_terminal 'R'
+end
+
+local function new_terminal_shell()
+  new_terminal '$SHELL'
+end
+
 -- Keybindings in normal mode
 wk.register({
   f = {
@@ -78,6 +104,12 @@ wk.register({
   },
   n = {
     name = ' [n]otes',
+  },
+  t = {
+    name = ' [t]erminal',
+    r = { new_terminal_r, ' R' },
+    p = { new_terminal_python, ' python' },
+    t = { new_terminal_shell, ' shell' },
   },
   v = {
     name =' neo[v]im',
