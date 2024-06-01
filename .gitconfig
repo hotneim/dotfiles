@@ -1,0 +1,5 @@
+[user]
+	name = Håkon Otneim
+	email = hakon.otneim@nhh.no
+[alias]
+	hist = log --all --decorate --oneline --graph

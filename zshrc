@@ -32,8 +32,8 @@ alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
 
-# Activate conda virtual environments
-alias ds="conda activate ~/work/venv/ds"
+## Activate conda virtual environments
+#alias ds="conda activate ~/work/venv/ds"
 
 # Use bat instead of cat (requires "brew install bat")
 alias cat="bat"
@@ -47,7 +47,7 @@ export PATH="$PATH:/Users/hakon/work/dotfiles/bin"
 
 # Source zsh-autosuggestions
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-#
+
 # Source zsh-syntax-highlighting
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
@@ -65,6 +65,10 @@ source ~/.zsh/fzf-tab/fzf-tab.plugin.zsh
 # Source fzf if it's not already added by the installation script
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# Needed this for homebrew to function properly
+export PATH=/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/Users/hakon/work/config/bin:/opt/homebrew/bin:/opt/homebrew/bin -
+
 # Enable starship prompt
 eval "$(starship init zsh)"
+
 
