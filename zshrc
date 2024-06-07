@@ -26,6 +26,7 @@ alias gh="git hist"       # (Requires git hist to be defined in .gitconfig)
 alias w="cd ~/work"
 alias h="cd ~"
 alias o="cd ~/Onedrive\ -\ Norges\ Handelshøyskole/"
+alias ic="cd /Users/hakon/Library/Mobile\ Documents/com~apple~CloudDocs"
 
 alias ..="cd .."
 alias ...="cd ../.."
@@ -43,7 +44,7 @@ alias notes='cd ~/work/notes/'
 alias review='nvim ~/work/notes/inbox/*.md'
 
 # Add folder of binaries to path
-export PATH="$PATH:/Users/hakon/work/dotfiles/bin"
+export PATH="$PATH:/Users/hakon/work/config/bin"
 
 # Source zsh-autosuggestions
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh

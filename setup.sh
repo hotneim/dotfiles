@@ -9,6 +9,7 @@ ln -s /Users/hakon/work/config/alacritty /Users/hakon/.config/alacritty
 ln -s /Users/hakon/work/config/nvim /Users/hakon/.config/nvim
 ln -s /Users/hakon/work/config/starship.toml /Users/hakon/.config/starship.toml
 ln -s /Users/hakon/work/config/tmux.conf /Users/hakon/.tmux.conf
+ln -s /Users/hakon/work/config/lsd.yaml /Users/hakon/.config/lsd/config.yaml
 
 # Repositories needed for fuzzy tab completion in zsh
 git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions

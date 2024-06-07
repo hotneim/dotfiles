@@ -42,3 +42,8 @@ done
 
 echo "Done 🪷"
 
+# Commit and push the changes
+git -C "$VAULT_DIR" add .
+commit_message=$(date "+%Y-%m-%d %H:%M")
+git -C "$VAULT_DIR" commit -m "$commit_message"
+git -C "$VAULT_DIR" push

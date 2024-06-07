@@ -102,6 +102,10 @@ wk.register({
       e = { vim.diagnostic.enable, '[e]nable' },
     },
   },
+  m = {
+    name = ' [m]arkdown',
+    s = { ':lua _G.strip_wikilink()<CR>', "strip link" },
+  },
   n = {
     name = ' [n]otes',
   },
