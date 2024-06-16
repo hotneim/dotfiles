@@ -16,6 +16,9 @@ return {
           },
           r = {
             command = {"R"}
+          },
+          python = {
+            command = {"python3"}
           }
         },
         -- How the repl window will be displayed
@@ -32,13 +35,13 @@ return {
         send_paragraph = "<space>sp",
         send_until_cursor = "<space>su",
         send_mark = "<space>sm",
-        -- mark_motion = "<space>mc",
-        -- mark_visual = "<space>mc",
-        -- remove_mark = "<space>md",
-        -- cr = "<space>s<cr>",
-        -- interrupt = "<space>s<space>",
+        mark_motion = "<space>mc",
+        mark_visual = "<space>mc",
+        remove_mark = "<space>md",
+        cr = "<space>s<cr>",
+        interrupt = "<space>s<space>",
         exit = "<space>sq",
-        -- clear = "<space>cl",
+        clear = "<space>cl",
       },
       -- If the highlight is on, you can change how it looks
       -- For the available options, check nvim_set_hl
@@ -54,7 +57,7 @@ return {
     vim.keymap.set('n', '<space>rf', '<cmd>IronFocus<cr>')
     vim.keymap.set('n', '<space>rh', '<cmd>IronHide<cr>')
 
- -- Register keymaps with which-key and provide descriptions
+ -- -- Register keymaps with which-key and provide descriptions
     local wk = require("which-key")
     wk.register({
       ["r"] = { name = " start [r]epl", 
@@ -65,21 +68,21 @@ return {
         w = {"<cmd>IronFocus<cr>", "Focus on REPL"}
       },
       ["s"] = { name = " [s]end to repl", 
-        c = {"<cmd>lua require('iron.core').send_motion()<CR>", "Send motion to REPL"},
-        v = {"<cmd>lua require('iron.core').visual_send()<CR>", "Send visual selection to REPL"},
-        f = {"<cmd>lua require('iron.core').send_file()<CR>", "Send file to REPL"},
-        l = {"<cmd>lua require('iron.core').send_line()<CR>", "Send line to REPL"},
-        p = {"<cmd>lua require('iron.core').send_paragraph()<CR>", "Send paragraph to REPL"},
-        u = {"<cmd>lua require('iron.core').send_until_cursor()<CR>", "Send until cursor to REPL"},
-        m = {"<cmd>lua require('iron.core').send_mark()<CR>", "Send mark to REPL"},
-        [" "] = {"<cmd>lua require('iron.core').interrupt()<CR>", "Interrupt REPL"},
-        q = {"<cmd>lua require('iron.core').exit()<CR>", "Exit REPL"},
+ --        c = {"<cmd>lua require('iron.core').send_motion()", "Send motion to REPL"},
+ --        v = {"<cmd>lua require('iron.core').visual_send()<CR>", "Send visual selection to REPL"},
+ --        f = {"<cmd>lua require('iron.core').send_file()<CR>", "Send file to REPL"},
+ --        l = {"<cmd>lua require('iron.core').send_line()<CR>", "Send line to REPL"},
+ --        p = {"<cmd>lua require('iron.core').send_paragraph()<CR>", "Send paragraph to REPL"},
+ --        u = {"<cmd>lua require('iron.core').send_until_cursor()<CR>", "Send until cursor to REPL"},
+ --        m = {"<cmd>lua require('iron.core').send_mark()<CR>", "Send mark to REPL"},
+ --        [" "] = {"<cmd>lua require('iron.core').interrupt()<CR>", "Interrupt REPL"},
+ --        q = {"<cmd>lua require('iron.core').exit()<CR>", "Exit REPL"},
       }
     }, { prefix = "<space>" })
-    --
-    -- Keybinding to exit the REPL and return to the script window
+ --    --
+ --    -- Keybinding to exit the REPL and return to the script window
     vim.api.nvim_set_keymap('t', '<Esc><Esc>', [[<C-\><C-n><C-w>p]], {noremap = true, silent = true})
-
+ --
     -- Set up keybindings for better interaction with the REPL window
     vim.api.nvim_exec([[
       augroup IronRepl

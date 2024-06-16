@@ -25,7 +25,7 @@ alias gh="git hist"       # (Requires git hist to be defined in .gitconfig)
 # Locations
 alias w="cd ~/work"
 alias h="cd ~"
-alias o="cd ~/Onedrive\ -\ Norges\ Handelshøyskole/"
+alias o="cd /Users/hakon/OneDrive\ -\ Norwegian\ School\ of\ Economics"
 alias ic="cd /Users/hakon/Library/Mobile\ Documents/com~apple~CloudDocs"
 
 alias ..="cd .."
@@ -69,6 +69,25 @@ source ~/.zsh/fzf-tab/fzf-tab.plugin.zsh
 # Needed this for homebrew to function properly
 export PATH=/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/Users/hakon/work/config/bin:/opt/homebrew/bin:/opt/homebrew/bin -
 
+# Use vi mode
+bindkey -v
+
+bindkey '^P' up-history
+bindkey '^N' down-history
+bindkey '^?' backward-delete-char
+bindkey '^h' backward-delete-char
+bindkey '^w' backward-kill-word
+bindkey '^r' history-incremental-search-backward
+
+function zle-line-init zle-keymap-select {
+    VIM_PROMPT="%{$fg_bold[yellow]%} [% NORMAL]%  %{$reset_color%}"
+    RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/}$(git_custom_status) $EPS1"
+    zle reset-prompt
+}
+
+zle -N zle-line-init
+zle -N zle-keymap-select
+export KEYTIMEOUT=1
 # Enable starship prompt
 eval "$(starship init zsh)"
 

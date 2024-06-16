@@ -8,27 +8,28 @@
 #
 # configuration for the alacritty terminal emulator
 
-import = ["~/.config/alacritty/themes/gruvbox_dark.toml"]
+import = ["~/.config/alacritty/themes/github_dark_default.toml"]
 
 [font]
-size = 15
+size = 16
 
 [font.normal]
-family = "Comic Code Ligatures"
+# family = "Comic Code Ligatures"
+family = "FiraCode Nerd Font Mono"
 style = "Light"
 
-[font.italic]
-family = "Comic Code Ligatures"
-style = "Light Italic"
-
+# [font.italic]
+# family = "Comic Code Ligatures"
+# style = "Light Italic"
+#
 [font.bold]
-family = "Comic Code Ligatures"
+family = "FiraCode Nerd Font Mono"
 style = "Medium"
 
-[font.bold_italic]
-family = "Comic Code Ligatures"
-style = "Medium Italic"
-
+# [font.bold_italic]
+# family = "Comic Code Ligatures"
+# style = "Medium Italic"
+#
 [window]
 dimensions = { columns = 100, lines = 70}
 
