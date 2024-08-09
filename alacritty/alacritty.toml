@@ -14,22 +14,21 @@ import = ["~/.config/alacritty/themes/github_dark_default.toml"]
 size = 16
 
 [font.normal]
-# family = "Comic Code Ligatures"
-family = "FiraCode Nerd Font Mono"
+family = "JetBrainsMono Nerd Font Propo"
 style = "Light"
 
-# [font.italic]
-# family = "Comic Code Ligatures"
-# style = "Light Italic"
-#
+[font.italic]
+family = "JetBrainsMono Nerd Font Propo"
+style = "Light Italic"
+
 [font.bold]
-family = "FiraCode Nerd Font Mono"
+family = "JetBrainsMono Nerd Font Propo"
 style = "Medium"
 
-# [font.bold_italic]
-# family = "Comic Code Ligatures"
-# style = "Medium Italic"
-#
+[font.bold_italic]
+family = "JetBrainsMono Nerd Font Propo"
+style = "Medium Italic"
+
 [window]
 dimensions = { columns = 100, lines = 70}
 
