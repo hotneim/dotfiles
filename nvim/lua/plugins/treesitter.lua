@@ -12,8 +12,8 @@ return {
         ensure_installed = {
           'r',
           'python',
-          'markdown',
-          'markdown_inline',
+          --'markdown',
+          --'markdown_inline',
           'julia',
           'bash',
           'yaml',
@@ -33,9 +33,11 @@ return {
         highlight = {
           enable = true,
           additional_vim_regex_highlighting = false,
+          disable = { "markdown" },
         },
         indent = {
           enable = true,
+          disable = { "markdown" },
         },
         incremental_selection = {
           enable = true,

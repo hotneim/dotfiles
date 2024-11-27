@@ -34,11 +34,19 @@ nmap('<S-Down>', '<cmd>resize -2<CR>')
 nmap('<S-Left>', '<cmd>vertical resize -2<CR>')
 nmap('<S-Right>', '<cmd>vertical resize +2<CR>')
 
-wk.register({
-  p = { '"_dP', 'replace without overwriting reg' },
-  d = { '"_d', 'delete without overwriting reg' },
-}, { mode = 'v', prefix = '<leader>' })
+-- wk.register({
+--   p = { '"_dP', 'replace without overwriting reg' },
+--   d = { '"_d', 'delete without overwriting reg' },
+-- }, { mode = 'v', prefix = '<leader>' })
 
+wk.add({
+  { "<leader>d", '"_d', desc = "delete without overwriting reg", mode = "v" },
+  { "<leader>p", '"_dP', desc = "replace without overwriting reg", mode = "v" },
+})
+
+
+-- R shortcuts
+imap('”', '%>%')
 
 -- Function to open terminal windows with specified split mode
 local function new_terminal(lang, mode)
@@ -65,60 +73,47 @@ local function new_terminal_shell()
   new_terminal '$SHELL'
 end
 
--- Keybindings in normal mode
-wk.register({
-  f = {
-    name = ' [f]ind (telescope)',
-    f = { '<cmd>Telescope find_files<cr>', '[f]iles' },
-    h = { '<cmd>Telescope help_tags<cr>', '[h]elp' },
-    k = { '<cmd>Telescope keymaps<cr>', '[k]eymaps' },
-    r = { '<cmd>Telescope lsp_references<cr>', '[r]eferences' },
-    g = { '<cmd>Telescope live_grep<cr>', '[g]rep' },
-    b = { '<cmd>Telescope current_buffer_fuzzy_find<cr>', '[b]uffer fuzzy find' },
-    m = { '<cmd>Telescope marks<cr>', '[m]arks' },
-    M = { '<cmd>Telescope man_pages<cr>', '[M]an pages' },
-    c = { '<cmd>Telescope git_commits<cr>', 'git [c]ommits' },
-    s = { '<cmd>Telescope lsp_document_symbols<cr>', 'document [s]ymbols' },
-    ['<space>'] = { '<cmd>Telescope buffers<cr>', '[ ] buffers' },
-    d = { '<cmd>Telescope buffers<cr>', '[d] buffers' },
-    q = { '<cmd>Telescope quickfix<cr>', '[q]uickfix' },
-    l = { '<cmd>Telescope loclist<cr>', '[l]oclist' },
-    j = { '<cmd>Telescope jumplist<cr>', '[j]umplist' },
-    n = {
-      name = '[n]otes',
-      m = { '<cmd>TelescopeLiveGrepMeetings<cr>', '[m]eetings' },
-      d = { '<cmd>TelescopeLiveGrepDaily<cr>', '[d]aily' },
-      r = { '<cmd>TelescopeLiveGrepReading<cr>', '[r]eading' },
-      n = { '<cmd>TelescopeLiveGrepNotes<cr>', 'all [n]otes' },
-    },
-  },
-  l = {
-    name = ' [l]anguage/lsp',
-    r = { '<cmd>Telescope lsp_references<cr>', '[r]eferences' },
-    e = { vim.diagnostic.open_float, 'diagnostics (show hover [e]rror)' },
-    d = {
-      name = ' [d]iagnostics',
-      d = { vim.diagnostic.disable, '[d]isable' },
-      e = { vim.diagnostic.enable, '[e]nable' },
-    },
-  },
-  m = {
-    name = ' [m]arkdown',
-    s = { ':lua _G.strip_wikilink()<CR>', "strip link" },
-  },
-  n = {
-    name = ' [n]otes',
-  },
-  t = {
-    name = ' [t]erminal',
-    r = { new_terminal_r, ' R' },
-    p = { new_terminal_python, ' python' },
-    t = { new_terminal_shell, ' shell' },
-  },
-  v = {
-    name =' neo[v]im',
-    t = {toggle_light_dark_theme, '[t]oggle light/dark theme'},
-  },
-  w = { ':set wrap!<cr>', '󰯟 toggle soft [w]rap'},
-  z = { ':Goyo<cr>', ' toggle [z]en'},
-}, { mode = 'n', prefix = '<leader>' })
+wk.add(
+  {
+    { "<leader>f", group = " [f]ind (telescope)" },
+    { "<leader>f<space>", "<cmd>Telescope buffers<cr>", desc = "[ ] buffers" },
+    { "<leader>fM", "<cmd>Telescope man_pages<cr>", desc = "[M]an pages" },
+    { "<leader>fb", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "[b]uffer fuzzy find" },
+    { "<leader>fc", "<cmd>Telescope git_commits<cr>", desc = "git [c]ommits" },
+    { "<leader>fd", "<cmd>Telescope buffers<cr>", desc = "[d] buffers" },
+    { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "[f]iles" },
+    { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "[g]rep" },
+    { "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "[h]elp" },
+    { "<leader>fj", "<cmd>Telescope jumplist<cr>", desc = "[j]umplist" },
+    { "<leader>fk", "<cmd>Telescope keymaps<cr>", desc = "[k]eymaps" },
+    { "<leader>fl", "<cmd>Telescope loclist<cr>", desc = "[l]oclist" },
+    { "<leader>fm", "<cmd>Telescope marks<cr>", desc = "[m]arks" },
+    { "<leader>fn", group = "[n]otes" },
+    { "<leader>fnd", "<cmd>TelescopeLiveGrepDaily<cr>", desc = "[d]aily" },
+    { "<leader>fnm", "<cmd>TelescopeLiveGrepMeetings<cr>", desc = "[m]eetings" },
+    { "<leader>fnn", "<cmd>TelescopeLiveGrepNotes<cr>", desc = "all [n]otes" },
+    { "<leader>fnr", "<cmd>TelescopeLiveGrepReading<cr>", desc = "[r]eading" },
+    { "<leader>fq", "<cmd>Telescope quickfix<cr>", desc = "[q]uickfix" },
+    { "<leader>fr", "<cmd>Telescope lsp_references<cr>", desc = "[r]eferences" },
+    { "<leader>fs", "<cmd>Telescope lsp_document_symbols<cr>", desc = "document [s]ymbols" },
+    { "<leader>l", group = " [l]anguage/lsp" },
+    { "<leader>ld", group = " [d]iagnostics" },
+    { "<leader>ldd", vim.diagnostic.disable, desc = "[d]isable" },
+    { "<leader>lde", vim.diagnostic.enable, desc = "[e]nable" },
+    { "<leader>le", vim.diagnostic.open_float, desc = "diagnostics (show hover [e]rror)" },
+    { "<leader>lr", "<cmd>Telescope lsp_references<cr>", desc = "[r]eferences" },
+    { "<leader>m", group = " [m]arkdown" },
+    { "<leader>ms", ":lua _G.strip_wikilink()<CR>", desc = "strip link" },
+    { "<leader>n", group = " [n]otes" },
+    { "<leader>t", group = " [t]erminal" },
+    { "<leader>tp", new_terminal_r, desc = " python" },
+    { "<leader>tr", new_terminal_python, desc = " R" },
+    { "<leader>tt", new_terminal_shell, desc = " shell" },
+    { "<leader>v", group = " neo[v]im" },
+    { "<leader>vt", toggle_light_dark_theme, desc = "[t]oggle light/dark theme" },
+    { "<leader>w", ":set wrap!<cr>", desc = "󰯟 toggle soft [w]rap" },
+    { "<leader>z", ":Goyo<cr>", desc = " toggle [z]en" },
+  }
+)
+
+
