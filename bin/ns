@@ -3,7 +3,7 @@
 # Directory containing markdown files
 VAULT_DIR="/Users/hakon/work/notes"
 SOURCE_DIR="inbox/accepted"
-DEST_DIR="zk"
+DEST_DIR=VAULT_DIR
 
 
 if [ ! -d "$VAULT_DIR/$SOURCE_DIR" ]; then

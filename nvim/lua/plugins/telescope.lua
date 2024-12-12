@@ -33,6 +33,7 @@ return {
           ".git/",
           "site_libs",
           ".venv",
+          "zk",
         },
         layout_strategy = "flex",
         sorting_strategy = "ascending",

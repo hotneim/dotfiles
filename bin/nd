@@ -15,7 +15,7 @@ if [ ! -f "$file_path" ]; then
   echo "---" > "inbox/${formatted_file_name}"
   echo "date: ${date}" >> "inbox/${formatted_file_name}"
   echo "folder:" >> "inbox/${formatted_file_name}"
-  echo "  - daily" >> "inbox/${formatted_file_name}"
+  echo "  - zk/daily" >> "inbox/${formatted_file_name}"
   echo "---" >> "inbox/${formatted_file_name}"
   echo "" >> "inbox/${formatted_file_name}"
   echo "#" >> "inbox/${formatted_file_name}"
