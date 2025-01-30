@@ -4,4 +4,4 @@ require 'config.functions'
 require 'config.lazy'
 require 'config.notes'
 require 'config.fold'
-
+require 'config.pdf'

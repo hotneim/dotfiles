@@ -105,7 +105,7 @@ wk.add(
     { "<leader>n", group = " [n]otes" },
     { "<leader>t", group = " [t]erminal" },
     { "<leader>tp", new_terminal_python, desc = " python" },
-    { "<leader>tr", new_terminal_python, desc = " R" },
+    { "<leader>tr", new_terminal_r, desc = " R" },
     { "<leader>tt", new_terminal_shell, desc = " shell" },
     { "<leader>v", group = " neo[v]im" },
     { "<leader>vt", toggle_light_dark_theme, desc = "[t]oggle light/dark theme" },

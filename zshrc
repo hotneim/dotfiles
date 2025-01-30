@@ -45,6 +45,7 @@ alias review='nvim ~/work/notes/inbox/*.md'
 
 # Add folder of binaries to path
 export PATH="$PATH:/Users/hakon/work/config/bin"
+export PATH="/Library/TeX/texbin:$PATH"
 
 # Source zsh-autosuggestions
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -67,7 +68,9 @@ source ~/.zsh/fzf-tab/fzf-tab.plugin.zsh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Needed this for homebrew to function properly
-export PATH=/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/Users/hakon/work/config/bin:/opt/homebrew/bin:/opt/homebrew/bin -
+# export PATH=/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/Users/hakon/work/config/bin:/opt/homebrew/bin:/opt/homebrew/bin -
+
+export PATH="/Library/TeX/texbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/Users/hakon/work/config/bin:/opt/homebrew/bin"
 
 # Use vi mode
 bindkey -v
@@ -91,4 +94,20 @@ export KEYTIMEOUT=1
 # Enable starship prompt
 eval "$(starship init zsh)"
 
+
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/opt/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/opt/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/opt/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/opt/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
 

@@ -1,0 +1,73 @@
+
+\documentclass[10pt]{article}
+
+% Adjust the margins
+% Adjust the margins
+\usepackage[margin=1.5cm]{geometry}
+
+% Load modern font packages
+\usepackage{fontspec}
+\usepackage[protrusion=true, expansion=false]{microtype} % Optional, improves typography
+
+% Enhanced table and math environments
+\usepackage{amsmath}    % For align* and other math environments
+\usepackage{array}       % For advanced table formatting
+\usepackage{booktabs}    % For improved table lines
+\usepackage{longtable}   % For multi-page tables
+\usepackage{float}
+
+% Conditional logic and hyperlinks
+\usepackage{ifthen}
+\usepackage{hyperref}
+\hypersetup{
+    pdftitle={$title$},
+    pdfauthor={$author$},
+    pdfcreator={Pandoc and XeLaTeX}
+}
+
+% Choose a sans-serif font for a more modern look (e.g., Helvetica)
+% You could also use a system font like 'Arial' or 'Calibri' if installed.
+\setmainfont{EB Garamond}
+
+
+% Define \tightlist so Pandoc won't choke on tight lists
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}
+}
+
+% Slightly tighter line spacing
+\linespread{0.95} 
+
+% Optional: remove page numbers
+\pagestyle{empty}
+
+\begin{document}
+
+$if(numbersections)$
+% If user passed --number-sections, let sections be numbered normally
+$else$
+\setcounter{secnumdepth}{0}   % turns off numbering
+$endif$
+
+% Title area
+\vspace{1em}
+\hrule
+\vspace{1em}
+\begin{center}
+    {\Large \textbf{$title$}} % Using large + bold for a more compact heading than \LARGE
+
+\ifthenelse{\equal{$author$}{} \and \equal{$date$}{}}{}{%
+    \vspace{0.5em}
+    \ifthenelse{\equal{$author$}{}}{}{\textit{$author$}\par}
+    \ifthenelse{\equal{$date$}{}}{}{\small $date$\par}
+}
+\end{center}
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+% Body
+$body$
+
+\end{document}
+
